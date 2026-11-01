@@ -7,8 +7,12 @@
 
 ## 1 前提：本地护栏已装好
 
+> **克隆仓库之后的第一件事**：跑一次 `bash tools/setup-git.sh`。
+> 钩子不进版本库（`core.hooksPath` 是本地配置），不跑这一步，你的机器上就拦不住 `main`。
+
 ```bash
-git config core.hooksPath .githooks     # 已经设好，重装跑 tools/setup-git.sh
+bash tools/setup-git.sh                 # 装护栏（推荐，一次就够）
+git config core.hooksPath .githooks     # 效果同上，手动版
 ```
 
 装好之后：
