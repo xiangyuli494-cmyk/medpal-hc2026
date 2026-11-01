@@ -1,0 +1,21 @@
+#!/bin/sh
+# 拦住"直接推 main"。所有改动走：分支 → PR → 2 个 Approve → Squash and merge。
+
+while read -r local_ref local_sha remote_ref remote_sha; do
+  case "$remote_ref" in
+    refs/heads/main|refs/heads/master)
+      if [ "$ALLOW_MAIN" = "1" ]; then
+        printf '⚠ 正在直推 %s（ALLOW_MAIN=1，仅限建仓/救火）\n' "$remote_ref"
+        continue
+      fi
+      printf '\n✗ 不能直接推 %s。\n\n' "$remote_ref"
+      printf '  1) git switch -c t2/视觉系统-1104\n'
+      printf '  2) git push -u origin t2/视觉系统-1104\n'
+      printf '  3) GitHub 上开 PR → T1 + 线负责人点 Approve → Squash and merge\n\n'
+      printf '  详见 CONTRIBUTING.md 第 3 节。\n\n'
+      exit 1
+      ;;
+  esac
+done
+
+exit 0

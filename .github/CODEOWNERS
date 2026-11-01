@@ -1,0 +1,29 @@
+# 谁的东西谁审。
+# 把下面四个 @T1-handle / @T2-handle … 换成真实 GitHub 用户名，否则不会生效。
+# 语法：<路径模式> <@用户名...>   （路径相对仓库根，后写的规则优先）
+
+# 兜底：任何改动都要 T1 看一眼
+*                               @T1-handle
+
+# T2 · 界面设计
+/02-design/04-视觉系统.md         @T2-handle
+/04-deliverables/01-高保真图/     @T2-handle
+/04-deliverables/04-展板/         @T2-handle
+
+# T3 · 流程与动态
+/04-deliverables/02-流程图/       @T3-handle
+/04-deliverables/03-视频/         @T3-handle
+/02-design/03-交互流程.md         @T3-handle
+
+# T4 · 研究与文档
+/05-research/                    @T4-handle
+/04-deliverables/05-设计说明/     @T4-handle
+/02-design/05-屏幕清单.md         @T4-handle
+
+# T1 · 架构与提交
+/01-competition/                 @T1-handle
+/02-design/02-信息架构.md         @T1-handle
+/README.md                       @T1-handle
+/CONTRIBUTING.md                 @T1-handle
+/tools/                          @T1-handle
+/.githooks/                      @T1-handle

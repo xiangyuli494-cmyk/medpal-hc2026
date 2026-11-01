@@ -1,0 +1,28 @@
+# ---- 系统垃圾 ----
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ---- 交付物：大文件不进仓库 ----
+04-deliverables/**/*.psd
+04-deliverables/**/*.ai
+04-deliverables/**/*.mp4
+04-deliverables/**/*.mov
+04-deliverables/**/*.zip
+04-deliverables/**/*.aep
+04-deliverables/**/*.prproj
+
+# ---- 编辑器 ----
+.vscode/
+.idea/
+*.swp
+
+# ---- Python ----
+__pycache__/
+*.pyc
+
+# ---- 临时 ----
+*.tmp
+*.bak
+*.log
+~$*

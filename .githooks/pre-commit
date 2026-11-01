@@ -1,0 +1,20 @@
+#!/bin/sh
+# 拦住"直接在 main 上提交"。想开分支：git switch -c t2/视觉系统-1104
+# 唯一例外：ALLOW_MAIN=1 git commit ...（只在建仓第一次提交时用）
+
+branch="$(git symbolic-ref --short -q HEAD 2>/dev/null || git rev-parse --abbrev-ref HEAD 2>/dev/null || echo '')"
+
+if [ "$branch" = "main" ] || [ "$branch" = "master" ]; then
+  if [ "$ALLOW_MAIN" = "1" ]; then
+    echo "⚠ 已在 $branch 上提交（ALLOW_MAIN=1，仅限建仓/救火）"
+    exit 0
+  fi
+  printf '\n✗ 你在 %s 上提交。这个仓库的规矩是：先开分支，再提交。\n\n' "$branch"
+  printf '  1) git switch -c t2/视觉系统-1104\n'
+  printf '  2) git add <文件> && git commit -m "feat(T2): 视觉系统页冻结"\n'
+  printf '  3) git push -u origin t2/视觉系统-1104，然后开 PR 等 Approve\n\n'
+  printf '  只在建仓第一次提交时用：ALLOW_MAIN=1 git commit ...\n\n'
+  exit 1
+fi
+
+exit 0
