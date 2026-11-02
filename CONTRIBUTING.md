@@ -7,8 +7,12 @@
 
 ## 1 前提：本地护栏已装好
 
+> **克隆仓库之后的第一件事**：跑一次 `bash tools/setup-git.sh`。
+> 钩子不进版本库（`core.hooksPath` 是本地配置），不跑这一步，你的机器上就拦不住 `main`。
+
 ```bash
-git config core.hooksPath .githooks     # 已经设好，重装跑 tools/setup-git.sh
+bash tools/setup-git.sh                 # 装护栏（推荐，一次就够）
+git config core.hooksPath .githooks     # 效果同上，手动版
 ```
 
 装好之后：
@@ -34,7 +38,7 @@ ALLOW_MAIN=1 git commit -m "chore: 初始化骨架"
 | --- | --- | --- |
 | `t1/信息架构-1106` | T1 | 信息架构定稿 |
 | `t2/视觉系统-1104` | T2 | 视觉系统页冻结 |
-| `t2/七屏导出-1116` | T2 | 导出 9 张 2x |
+| `t2/七屏导出-1116` | T2 | 导出 7 张 2x |
 | `t3/流程图-1117` | T3 | 主流程图 |
 | `t4/原话卡-1107` | T4 | 访谈原话卡 |
 
@@ -73,7 +77,7 @@ git push -u origin t2/视觉系统-1104
 | `05-research/`、`04-deliverables/05-设计说明/`、全部界面文案 | **T4** |
 | **任何分支要进 `main`** | **T1 必点 + 该线负责人再点**（共 2 个 Approve） |
 
-> 2 个 Approve 的作用：防止自己批自己。4 人团队里这是唯一有效的一道闸。
+> 2 个 Approve 的作用：防止自己批自己。5 人团队里这是唯一有效的一道闸。
 
 ---
 
@@ -148,7 +152,7 @@ gh api --method PUT repos/OWNER/REPO/branches/main/protection \
 
 ## 9 CODEOWNERS 要改一处
 
-`.github/CODEOWNERS` 里的 `@T1-handle` 是占位符，**换成四个人的真实 GitHub 用户名**，否则不会自动 @ 人、也不会自动要求审批。
+`.github/CODEOWNERS` 已经填了五个真实账号。**新加人只改这一处**：路径 → 谁负责，否则不会自动 @ 人、也不会自动要求审批。
 
 ---
 

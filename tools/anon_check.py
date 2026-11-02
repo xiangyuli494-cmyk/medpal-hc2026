@@ -18,6 +18,7 @@
 
 import os
 import re
+import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,8 +47,14 @@ SOFT = [
     (r"(大学|学院|学校|附属医院|人民医院|中心医院)", "机构名：确认是否真实单位", None),
 ]
 
+# .git 历史里允许出现的邮箱域：中性仓库身份不算泄漏
+SAFE_EMAIL_DOMAINS = ("users.noreply.github.com", "example.com", "localhost")
+
 TEXT_EXT = {".md", ".txt", ".html", ".css", ".js", ".json", ".py", ".svg", ".yml", ".yaml"}
-SKIP_DIRS = {".git", "node_modules", "__pycache__", "04-deliverables"}
+SKIP_DIRS = {".git", "node_modules", "__pycache__"}
+
+# 会被交出去、会被评委看到的目录：禁用词在这里才算硬伤
+DELIVERABLE_PREFIXES = ("02-design", "04-deliverables")
 SKIP_FILES = {os.path.join("tools", "anon_check.py")}
 
 # 内部策划档：允许引用官方来源
@@ -70,6 +77,42 @@ def walk():
                 yield os.path.join(base, name)
 
 
+def git_history():
+    """扫 .git 的提交作者与提交说明——文件遍历会跳过 .git，这是原来漏掉的一层。"""
+    if not os.path.isdir(os.path.join(ROOT, ".git")):
+        return None
+    try:
+        out = subprocess.run(
+            ["git", "-C", ROOT, "log", "--all", "--format=%an%x1F%ae%x1F%s"],
+            capture_output=True, text=True, encoding="utf-8",
+            errors="replace", timeout=20,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if out.returncode != 0:
+        return None
+    hits, seen = [], set()
+    for line in out.stdout.splitlines():
+        parts = line.split("\x1f")
+        if len(parts) < 3:
+            continue
+        blob = "%s <%s> %s" % (parts[0], parts[1], parts[2])
+        if blob in seen:
+            continue
+        seen.add(blob)
+        for word in BANNED:
+            if word and word in blob:
+                hits.append((".git 提交历史", 0, "禁用词：%s" % word, blob[:80]))
+        for pattern, why, scope in HARD:
+            if scope is None or scope == "deliverable":
+                for m in re.finditer(pattern, blob):
+                    hit = m.group(0)
+                    if why.startswith("邮箱") and hit.split("@")[-1].lower() in SAFE_EMAIL_DOMAINS:
+                        continue
+                    hits.append((".git 提交历史", 0, "%s：%s" % (why, hit), blob[:80]))
+    return hits
+
+
 def main():
     hard_hits, soft_hits, scanned = [], [], 0
 
@@ -85,9 +128,14 @@ def main():
         scanned += 1
 
         for no, line in enumerate(lines, 1):
+            is_deliverable = rel.replace("\\", "/").startswith(DELIVERABLE_PREFIXES)
             for word in BANNED:
                 if word and word in line:
-                    hard_hits.append((rel, no, "禁用词：%s" % word, line.strip()[:80]))
+                    if is_deliverable:
+                        hard_hits.append((rel, no, "禁用词：%s" % word, line.strip()[:80]))
+                    else:
+                        soft_hits.append((rel, no, "禁用词（内部档，不进提交包）：%s" % word,
+                                          line.strip()[:80]))
             for pattern, why, scope in HARD:
                 if not in_scope(scope, rel):
                     continue
@@ -99,7 +147,20 @@ def main():
                 for m in re.finditer(pattern, line):
                     soft_hits.append((rel, no, "%s：%s" % (why, m.group(0)), line.strip()[:80]))
 
-    print("扫描 %d 个文本文件" % scanned)
+    # 交付目录里绝不能出现 .git —— 打包时最容易连锅端
+    for base, dirs, _files in os.walk(os.path.join(ROOT, "04-deliverables")):
+        for d in list(dirs):
+            if d == ".git":
+                hard_hits.append((os.path.relpath(os.path.join(base, d), ROOT), 0,
+                                  "交付目录里混进了 .git", "打包前删掉：它会带上全部历史与身份"))
+
+    gh = git_history()
+    if gh is None:
+        print("（不是 git 仓库或读不到历史：跳过 .git 检查）")
+    else:
+        hard_hits.extend(gh)
+
+    print("扫描 %d 个文本文件%s" % (scanned, " + .git 提交历史" if gh is not None else ""))
 
     if soft_hits:
         print("\n提示 %d 处（引用主办与赛区高校属正常，确认一遍即可）：" % len(soft_hits))
@@ -114,7 +175,10 @@ def main():
             print("  %s:%d  %s\n      %s" % (rel, no, why, snippet))
         return 1
 
-    print("\n通过：没有发现身份痕迹。")
+    if gh is not None:
+        print("\n通过：工作区文本与 .git 提交历史都没有发现身份痕迹。")
+    else:
+        print("\n通过：工作区文本没有发现身份痕迹（.git 历史本次未检查）。")
     return 0
 
 

@@ -59,7 +59,7 @@
 
 1. 先把 [`02-design/04-视觉系统.md`](02-design/04-视觉系统.md) 的色板 / 字阶 / 间距搬进 Figma 的「视觉系统」页，画框 **1024 × 600**。
 2. 再按 [`02-design/05-屏幕清单.md`](02-design/05-屏幕清单.md) 一屏一屏画，导出 2x（2048 × 1200）到 `04-deliverables/01-高保真图/`。
-3. 谁负责哪条线、哪天交、交成什么样算过 —— 看 [`01-competition/06-四人分工与验收标准.md`](01-competition/06-四人分工与验收标准.md)。
+3. 谁负责哪条线、哪天交、交成什么样算过 —— 看 [`01-competition/06-五人分工与验收标准.md`](01-competition/06-五人分工与验收标准.md)。
 4. 流程图与可点击原型用同一个 Figma 文件，页面分开：`视觉系统` / `组件` / `屏幕` / `原型` / `流程图`。
 
 ---
@@ -76,9 +76,9 @@ git push -u origin t2/视觉系统-1104   # 只推自己的分支
 
 GitHub 上开 PR（模板自动带出）→ **T1 + 该线负责人各点一次 Approve** → Squash and merge → 删分支。
 
-- 在 `main` 上 `commit` / `push` 会被 `.githooks/` **直接拦下**，绕不过去（唯一例外：建仓第一次提交用 `ALLOW_MAIN=1`）。
+- 在 `main` 上 `commit` / `push` 会被 `.githooks/` 拦下——**前提是本机跑过 `tools/setup-git.sh`**。`core.hooksPath` 是本地配置，不跟着仓库走：新克隆不做这一步，钩子就是不存在的，照样能往 main 提交。真正兜底的是 GitHub 上的分支保护（Settings → Branches），本地钩子只是让人少犯错。
 - 服务器端还要开保护：Settings → Branches → Require a pull request（2 approvals）+ Require review from Code Owners。步骤抄 [`CONTRIBUTING.md`](CONTRIBUTING.md) 第 8 节。
-- `.github/CODEOWNERS` 里的 `@T1-handle` 是占位符，**换成四个人的真实 GitHub 用户名**才生效。
+- `.github/CODEOWNERS` 里已经是五个真实账号（`xiangyuli494-cmyk` / `zincumyu` / `Hcp1111` / `suyouZJF` / `xy-Z5`），谁改哪块就自动找谁审。
 
 ---
 
