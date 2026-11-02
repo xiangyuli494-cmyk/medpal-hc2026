@@ -77,7 +77,7 @@ git push -u origin t2/视觉系统-1104
 | `05-research/`、`04-deliverables/05-设计说明/`、全部界面文案 | **T4** |
 | **任何分支要进 `main`** | **T1 必点 + 该线负责人再点**（共 2 个 Approve） |
 
-> 2 个 Approve 的作用：防止自己批自己。4 人团队里这是唯一有效的一道闸。
+> 2 个 Approve 的作用：防止自己批自己。5 人团队里这是唯一有效的一道闸。
 
 ---
 
@@ -152,7 +152,7 @@ gh api --method PUT repos/OWNER/REPO/branches/main/protection \
 
 ## 9 CODEOWNERS 要改一处
 
-`.github/CODEOWNERS` 里的 `@T1-handle` 是占位符，**换成四个人的真实 GitHub 用户名**，否则不会自动 @ 人、也不会自动要求审批。
+`.github/CODEOWNERS` 已经填了五个真实账号。**新加人只改这一处**：路径 → 谁负责，否则不会自动 @ 人、也不会自动要求审批。
 
 ---
 

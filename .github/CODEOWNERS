@@ -1,29 +1,31 @@
-# 谁的东西谁审。
-# 把下面四个 @T1-handle / @T2-handle … 换成真实 GitHub 用户名，否则不会生效。
+# 谁的东西谁审。改路径就改这一份，别在别处记第二套。
 # 语法：<路径模式> <@用户名...>   （路径相对仓库根，后写的规则优先）
 
 # 兜底：任何改动都要 T1 看一眼
-*                               @T1-handle
+*                               @xiangyuli494-cmyk
 
-# T2 · 界面设计
-/02-design/04-视觉系统.md         @T2-handle
-/04-deliverables/01-高保真图/     @T2-handle
-/04-deliverables/04-展板/         @T2-handle
+# T2 · 界面设计（zincumyu）
+/02-design/04-视觉系统.md         @zincumyu
+/04-deliverables/01-高保真图/     @zincumyu
+/04-deliverables/04-展板/         @zincumyu
 
-# T3 · 流程与动态
-/04-deliverables/02-流程图/       @T3-handle
-/04-deliverables/03-视频/         @T3-handle
-/02-design/03-交互流程.md         @T3-handle
+# T3 · 流程与动态（Hcp1111）
+/04-deliverables/02-流程图/       @Hcp1111
+/04-deliverables/03-视频/         @Hcp1111
+/02-design/03-交互流程.md         @Hcp1111
 
-# T4 · 研究与文档
-/05-research/                    @T4-handle
-/04-deliverables/05-设计说明/     @T4-handle
-/02-design/05-屏幕清单.md         @T4-handle
+# T4 · 研究与文档（suyouZJF）
+/05-research/                    @suyouZJF
+/04-deliverables/05-设计说明/     @suyouZJF
+/02-design/05-屏幕清单.md         @suyouZJF
 
-# T1 · 架构与提交
-/01-competition/                 @T1-handle
-/02-design/02-信息架构.md         @T1-handle
-/README.md                       @T1-handle
-/CONTRIBUTING.md                 @T1-handle
-/tools/                          @T1-handle
-/.githooks/                      @T1-handle
+# T5 · 实拍与后勤（xy-Z5）
+/04-deliverables/03-视频/raw/     @xy-Z5
+
+# T1 · 架构与提交（队长）
+/01-competition/                 @xiangyuli494-cmyk
+/02-design/02-信息架构.md         @xiangyuli494-cmyk
+/README.md                       @xiangyuli494-cmyk
+/CONTRIBUTING.md                 @xiangyuli494-cmyk
+/tools/                          @xiangyuli494-cmyk
+/.githooks/                      @xiangyuli494-cmyk

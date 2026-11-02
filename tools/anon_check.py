@@ -51,7 +51,10 @@ SOFT = [
 SAFE_EMAIL_DOMAINS = ("users.noreply.github.com", "example.com", "localhost")
 
 TEXT_EXT = {".md", ".txt", ".html", ".css", ".js", ".json", ".py", ".svg", ".yml", ".yaml"}
-SKIP_DIRS = {".git", "node_modules", "__pycache__", "04-deliverables"}
+SKIP_DIRS = {".git", "node_modules", "__pycache__"}
+
+# 会被交出去、会被评委看到的目录：禁用词在这里才算硬伤
+DELIVERABLE_PREFIXES = ("02-design", "04-deliverables")
 SKIP_FILES = {os.path.join("tools", "anon_check.py")}
 
 # 内部策划档：允许引用官方来源
@@ -125,9 +128,14 @@ def main():
         scanned += 1
 
         for no, line in enumerate(lines, 1):
+            is_deliverable = rel.replace("\\", "/").startswith(DELIVERABLE_PREFIXES)
             for word in BANNED:
                 if word and word in line:
-                    hard_hits.append((rel, no, "禁用词：%s" % word, line.strip()[:80]))
+                    if is_deliverable:
+                        hard_hits.append((rel, no, "禁用词：%s" % word, line.strip()[:80]))
+                    else:
+                        soft_hits.append((rel, no, "禁用词（内部档，不进提交包）：%s" % word,
+                                          line.strip()[:80]))
             for pattern, why, scope in HARD:
                 if not in_scope(scope, rel):
                     continue
