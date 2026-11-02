@@ -139,6 +139,13 @@ def main():
                 for m in re.finditer(pattern, line):
                     soft_hits.append((rel, no, "%s：%s" % (why, m.group(0)), line.strip()[:80]))
 
+    # 交付目录里绝不能出现 .git —— 打包时最容易连锅端
+    for base, dirs, _files in os.walk(os.path.join(ROOT, "04-deliverables")):
+        for d in list(dirs):
+            if d == ".git":
+                hard_hits.append((os.path.relpath(os.path.join(base, d), ROOT), 0,
+                                  "交付目录里混进了 .git", "打包前删掉：它会带上全部历史与身份"))
+
     gh = git_history()
     if gh is None:
         print("（不是 git 仓库或读不到历史：跳过 .git 检查）")
