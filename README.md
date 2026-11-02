@@ -76,7 +76,7 @@ git push -u origin t2/视觉系统-1104   # 只推自己的分支
 
 GitHub 上开 PR（模板自动带出）→ **T1 + 该线负责人各点一次 Approve** → Squash and merge → 删分支。
 
-- 在 `main` 上 `commit` / `push` 会被 `.githooks/` **直接拦下**，绕不过去（唯一例外：建仓第一次提交用 `ALLOW_MAIN=1`）。
+- 在 `main` 上 `commit` / `push` 会被 `.githooks/` 拦下——**前提是本机跑过 `tools/setup-git.sh`**。`core.hooksPath` 是本地配置，不跟着仓库走：新克隆不做这一步，钩子就是不存在的，照样能往 main 提交。真正兜底的是 GitHub 上的分支保护（Settings → Branches），本地钩子只是让人少犯错。
 - 服务器端还要开保护：Settings → Branches → Require a pull request（2 approvals）+ Require review from Code Owners。步骤抄 [`CONTRIBUTING.md`](CONTRIBUTING.md) 第 8 节。
 - `.github/CODEOWNERS` 里的 `@T1-handle` 是占位符，**换成四个人的真实 GitHub 用户名**才生效。
 

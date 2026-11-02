@@ -18,6 +18,7 @@
 
 import os
 import re
+import subprocess
 import sys
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -46,6 +47,9 @@ SOFT = [
     (r"(大学|学院|学校|附属医院|人民医院|中心医院)", "机构名：确认是否真实单位", None),
 ]
 
+# .git 历史里允许出现的邮箱域：中性仓库身份不算泄漏
+SAFE_EMAIL_DOMAINS = ("users.noreply.github.com", "example.com", "localhost")
+
 TEXT_EXT = {".md", ".txt", ".html", ".css", ".js", ".json", ".py", ".svg", ".yml", ".yaml"}
 SKIP_DIRS = {".git", "node_modules", "__pycache__", "04-deliverables"}
 SKIP_FILES = {os.path.join("tools", "anon_check.py")}
@@ -68,6 +72,42 @@ def walk():
         for name in files:
             if os.path.splitext(name)[1].lower() in TEXT_EXT:
                 yield os.path.join(base, name)
+
+
+def git_history():
+    """扫 .git 的提交作者与提交说明——文件遍历会跳过 .git，这是原来漏掉的一层。"""
+    if not os.path.isdir(os.path.join(ROOT, ".git")):
+        return None
+    try:
+        out = subprocess.run(
+            ["git", "-C", ROOT, "log", "--all", "--format=%an%x1F%ae%x1F%s"],
+            capture_output=True, text=True, encoding="utf-8",
+            errors="replace", timeout=20,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if out.returncode != 0:
+        return None
+    hits, seen = [], set()
+    for line in out.stdout.splitlines():
+        parts = line.split("\x1f")
+        if len(parts) < 3:
+            continue
+        blob = "%s <%s> %s" % (parts[0], parts[1], parts[2])
+        if blob in seen:
+            continue
+        seen.add(blob)
+        for word in BANNED:
+            if word and word in blob:
+                hits.append((".git 提交历史", 0, "禁用词：%s" % word, blob[:80]))
+        for pattern, why, scope in HARD:
+            if scope is None or scope == "deliverable":
+                for m in re.finditer(pattern, blob):
+                    hit = m.group(0)
+                    if why.startswith("邮箱") and hit.split("@")[-1].lower() in SAFE_EMAIL_DOMAINS:
+                        continue
+                    hits.append((".git 提交历史", 0, "%s：%s" % (why, hit), blob[:80]))
+    return hits
 
 
 def main():
@@ -99,7 +139,13 @@ def main():
                 for m in re.finditer(pattern, line):
                     soft_hits.append((rel, no, "%s：%s" % (why, m.group(0)), line.strip()[:80]))
 
-    print("扫描 %d 个文本文件" % scanned)
+    gh = git_history()
+    if gh is None:
+        print("（不是 git 仓库或读不到历史：跳过 .git 检查）")
+    else:
+        hard_hits.extend(gh)
+
+    print("扫描 %d 个文本文件%s" % (scanned, " + .git 提交历史" if gh is not None else ""))
 
     if soft_hits:
         print("\n提示 %d 处（引用主办与赛区高校属正常，确认一遍即可）：" % len(soft_hits))
@@ -114,7 +160,10 @@ def main():
             print("  %s:%d  %s\n      %s" % (rel, no, why, snippet))
         return 1
 
-    print("\n通过：没有发现身份痕迹。")
+    if gh is not None:
+        print("\n通过：工作区文本与 .git 提交历史都没有发现身份痕迹。")
+    else:
+        print("\n通过：工作区文本没有发现身份痕迹（.git 历史本次未检查）。")
     return 0
 
 
