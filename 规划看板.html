@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>小暖 · 华灿奖 25 天规划看板</title>
+<style>
+:root{
+  --paper:#F6F3EE; --surface:#fff; --ink:#14181A; --ink2:#61696D; --line:#E3DFD7;
+  --teal:#0E6E63; --teal100:#DCEAE6; --amber:#C9761F; --amber100:#F8E9D6;
+  --red:#B5392F; --red100:#F6DFDB; --green:#2C7A52; --green100:#DDEDE3;
+}
+*{box-sizing:border-box}
+body{
+  margin:0; background:var(--paper); color:var(--ink);
+  font-family:"PingFang SC","Microsoft YaHei","Hiragino Sans GB",system-ui,sans-serif;
+  font-size:15px; line-height:1.65;
+}
+.wrap{max-width:1080px; margin:0 auto; padding:48px 28px 96px}
+header{border-bottom:2px solid var(--ink); padding-bottom:22px; margin-bottom:34px}
+.kicker{font-size:12px; letter-spacing:.18em; color:var(--ink2); text-transform:uppercase}
+h1{font-size:34px; line-height:1.2; margin:10px 0 6px; letter-spacing:-.01em}
+.sub{color:var(--ink2); font-size:15px}
+.stats{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin:26px 0 8px}
+.stat{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px}
+.stat b{display:block; font-size:28px; line-height:1.1; font-variant-numeric:tabular-nums}
+.stat span{font-size:12.5px; color:var(--ink2)}
+.stat.hot b{color:var(--red)}
+.bar{height:6px; background:var(--line); border-radius:99px; overflow:hidden; margin-top:14px}
+.bar i{display:block; height:100%; background:var(--teal)}
+h2{font-size:20px; margin:52px 0 4px; padding-left:14px; border-left:4px solid var(--teal)}
+h2 em{font-style:normal; font-size:12px; color:var(--ink2); margin-left:8px; letter-spacing:.06em}
+.lead{color:var(--ink2); font-size:13.5px; margin:6px 0 18px; padding-left:18px}
+table{width:100%; border-collapse:collapse; background:var(--surface); border:1px solid var(--line); border-radius:12px; overflow:hidden; font-size:13.5px}
+th{text-align:left; font-weight:600; font-size:12px; letter-spacing:.06em; color:var(--ink2); background:#FBFAF7; padding:10px 12px; border-bottom:1px solid var(--line)}
+td{padding:10px 12px; border-bottom:1px solid #EFEBE3; vertical-align:top}
+tr:last-child td{border-bottom:none}
+td.n{font-variant-numeric:tabular-nums; white-space:nowrap; color:var(--ink2); width:64px}
+td.who{white-space:nowrap; font-weight:600; width:104px}
+tr.today{background:var(--teal100)}
+tr.today td.n{color:var(--teal); font-weight:700}
+tr.week td{background:#FBFAF7; font-size:12px; color:var(--ink2); letter-spacing:.08em; padding:7px 12px}
+.badge{display:inline-block; font-size:11px; padding:1px 7px; border-radius:99px; vertical-align:1px; margin-left:6px; font-weight:600}
+.b-gate{background:var(--amber100); color:#8A500F}
+.b-done{background:var(--green100); color:var(--green)}
+.b-hot{background:var(--red100); color:var(--red)}
+.cards{display:grid; grid-template-columns:repeat(3,1fr); gap:14px}
+.card{background:var(--surface); border:1px solid var(--line); border-radius:14px; padding:16px 18px}
+.card h3{margin:0 0 2px; font-size:15px}
+.card .gh{font-size:12px; color:var(--teal); font-family:ui-monospace,Menlo,Consolas,monospace}
+.card p{margin:10px 0 0; font-size:13px; color:var(--ink2)}
+.card .next{margin-top:12px; padding-top:10px; border-top:1px dashed var(--line); font-size:13px}
+.card .next b{color:var(--ink)}
+.card.key{border-color:var(--teal); box-shadow:0 0 0 1px var(--teal) inset}
+.tag{font-size:11px; background:var(--teal100); color:var(--teal); padding:1px 7px; border-radius:99px; margin-left:6px}
+ol.rules{padding-left:20px; margin:0}
+ol.rules li{margin:6px 0; color:var(--ink2)}
+ol.rules b{color:var(--ink)}
+footer{margin-top:64px; padding-top:18px; border-top:1px solid var(--line); color:var(--ink2); font-size:12.5px}
+@media print{body{background:#fff} .wrap{padding:0} h2{page-break-after:avoid} table{page-break-inside:auto}}
+@media(max-width:820px){.stats{grid-template-columns:repeat(2,1fr)} .cards{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header>
+  <div class="kicker">2026 新锐设计竞赛 · 华灿奖</div>
+  <h1>小暖 · 25 天规划看板</h1>
+  <div class="sub">创意赛道 · 数字媒体设计 / 交互设计 · 高校学生组 ｜ 作品名《小暖》 ｜ 团队 5 人（1 第一作者 + 4 成员）</div>
+</header>
+
+<div class="stats">
+  <div class="stat"><b>11-27</b><span>17:00 提交截止</span></div>
+  <div class="stat hot"><b>25</b><span>天后交卷（今天 11-02，第 2 天）</span></div>
+  <div class="stat"><b>5</b><span>道门禁 · 已过 0 道</span></div>
+  <div class="stat"><b>9</b><span>张要交的高保真图</span></div>
+</div>
+<div class="bar"><i style="width:8%"></i></div>
+
+<h2>1 五条线 <em>WHO DOES WHAT</em></h2>
+<div class="lead">每个人只对自己那条线签字。别人替他签字等于没做。</div>
+<div class="cards">
+  <div class="card">
+    <h3>T1 队长 · 交互架构</h3>
+    <div class="gh">@xiangyuli494-cmyk</div>
+    <p>信息架构、交互流程、通道契约、说明 PDF、提交与合规。</p>
+    <div class="next">今天：<b>仓库骨架已就位，等 T2 交三版小样</b></div>
+  </div>
+  <div class="card key">
+    <h3>T2 界面设计<span class="tag">有否决权</span></h3>
+    <div class="gh">@zincumyu</div>
+    <p>视觉系统、七屏高保真、组件库、展板、资产导出。他说界面不成立，就不进图。</p>
+    <div class="next">今天：<b>3 版首图小样</b>（温暖 / 冷静 / 纸张），明天选稿</div>
+  </div>
+  <div class="card">
+    <h3>T3 流程与动态</h3>
+    <div class="gh">@Hcp1111</div>
+    <p>交互流程图、可点击原型、90 秒成片剪辑。</p>
+    <div class="next">11-05 起：<b>组件库联调 → 原型</b></div>
+  </div>
+  <div class="card">
+    <h3>T4 研究与文档</h3>
+    <div class="gh">@suyouZJF</div>
+    <p>访谈原话卡、全部界面文案、设计说明 PDF、匿名检查。</p>
+    <div class="next">11-07：<b>访谈 3 人，出 ≥12 张原话卡</b></div>
+  </div>
+  <div class="card">
+    <h3>T5 实拍与后勤</h3>
+    <div class="gh">@xy-Z5</div>
+    <p>空镜与手部特写、场地设备、拍摄日统筹、素材归档。</p>
+    <div class="next">11-08：<b>场地与设备清单</b></div>
+  </div>
+</div>
+
+<h2>2 逐日表 <em>25 WORKDAYS + 2 BUFFER</em></h2>
+<div class="lead">内部上传死线 <b>11-25</b>。11-26 / 27 只救火，不改内容。表里高亮的是今天。</div>
+<table>
+<thead><tr><th>日期</th><th>周</th><th>主线</th><th>当天交付</th><th>负责</th></tr></thead>
+<tbody>
+<tr class="week"><td colspan="5">第 1 周 · 定调与视觉系统（11-01 → 11-07）</td></tr>
+<tr><td class="n">11-01</td><td class="n">日</td><td>定调</td><td>仓库骨架 + 口径文档 + 官网报名</td><td class="who">T1</td></tr>
+<tr class="today"><td class="n">11-02</td><td class="n">一</td><td>定调</td><td>3 版首图小样（温暖 / 冷静 / 纸张）<span class="badge b-hot">今天</span></td><td class="who">T2</td></tr>
+<tr><td class="n">11-03</td><td class="n">二</td><td>定调</td><td>盲选会 + 记录理由，<b>冻结视觉方向</b><span class="badge b-gate">G1</span></td><td class="who">全组</td></tr>
+<tr><td class="n">11-04</td><td class="n">三</td><td>视觉系统</td><td>色板 / 字阶 / 间距 / 圆角 / 阴影（Figma 一页）</td><td class="who">T2</td></tr>
+<tr><td class="n">11-05</td><td class="n">四</td><td>视觉系统</td><td>组件库 v1：按钮 / 磁贴 / 卡片 / 字幕条 / 金额宫格 / 状态条</td><td class="who">T2 T3</td></tr>
+<tr><td class="n">11-06</td><td class="n">五</td><td>视觉系统</td><td>大字模式 + 高对比模式：一套组件两种覆盖</td><td class="who">T2</td></tr>
+<tr><td class="n">11-07</td><td class="n">六</td><td>研究</td><td>访谈 3 人（2 老人 / 1 视障或听障），原话卡 ≥12 张</td><td class="who">T4</td></tr>
+<tr class="week"><td colspan="5">第 2 周 · 组件冻结 → 七屏（11-08 → 11-14）</td></tr>
+<tr><td class="n">11-08</td><td class="n">日</td><td>视觉系统</td><td>图标 12 个（自绘线性）+ 小暖 5 表情落位</td><td class="who">T2</td></tr>
+<tr><td class="n">11-09</td><td class="n">一</td><td>视觉系统</td><td>栅格确认 + 最长文案压测，<b>组件库冻结</b><span class="badge b-gate">G2</span></td><td class="who">T2 T4</td></tr>
+<tr><td class="n">11-10</td><td class="n">二</td><td>六屏</td><td>屏 01 入口分流 + 屏 04 复述校验</td><td class="who">T2</td></tr>
+<tr><td class="n">11-11</td><td class="n">三</td><td>六屏</td><td>屏 02 视障语音通道（全黑）+ 屏 03 替我说</td><td class="who">T2</td></tr>
+<tr><td class="n">11-12</td><td class="n">四</td><td>六屏</td><td>屏 05 医保三宫格 + 屏 06 家属端</td><td class="who">T2</td></tr>
+<tr><td class="n">11-13</td><td class="n">五</td><td>六屏</td><td>异常屏 E1 补齐 + 七屏一致性检查（字阶 / 留白 / 按钮 / 求助键）</td><td class="who">T1 T2</td></tr>
+<tr><td class="n">11-14</td><td class="n">六</td><td>六屏</td><td>关键状态补图（加载 / 出错 / 求证 / 完成）+ 清问题清单</td><td class="who">T2</td></tr>
+<tr class="week"><td colspan="5">第 3 周 · 冻结、流程、视频（11-15 → 11-21）</td></tr>
+<tr><td class="n">11-15</td><td class="n">日</td><td>六屏</td><td>外部测试：2 个不看文档的人，只给图问"这是什么"</td><td class="who">T4</td></tr>
+<tr><td class="n">11-16</td><td class="n">一</td><td>六屏</td><td><b>七屏冻结 + 导出 9 张 2x（2048×1200）</b><span class="badge b-gate">G3</span></td><td class="who">T2</td></tr>
+<tr><td class="n">11-17</td><td class="n">二</td><td>流程</td><td>主流程图（11 节点）</td><td class="who">T3</td></tr>
+<tr><td class="n">11-18</td><td class="n">三</td><td>流程</td><td>三通道分支图 + 异常降级图（断网 / 认不准 / 越界）</td><td class="who">T3</td></tr>
+<tr><td class="n">11-19</td><td class="n">四</td><td>视频</td><td>9 镜分镜表（画面 / 台词 / 时长 / 字幕 / 素材来源）</td><td class="who">T3 T4</td></tr>
+<tr><td class="n">11-20</td><td class="n">五</td><td>视频</td><td>录屏 + 实拍空镜（走廊 / 候诊椅 / 手部特写）</td><td class="who">T3 T2 T5</td></tr>
+<tr><td class="n">11-21</td><td class="n">六</td><td>视频</td><td>剪辑成片 90±5 秒 + 字幕 + 音效，<b>材料齐</b><span class="badge b-gate">G4</span></td><td class="who">T3 T1</td></tr>
+<tr class="week"><td colspan="5">第 4 周 · 展板、说明、上传（11-22 → 11-27）</td></tr>
+<tr><td class="n">11-22</td><td class="n">日</td><td>材料</td><td>展板排版（主视觉 1 + 细节 3）</td><td class="who">T2</td></tr>
+<tr><td class="n">11-23</td><td class="n">一</td><td>材料</td><td>设计说明 PDF（12 页，六章）</td><td class="who">T1 T4</td></tr>
+<tr><td class="n">11-24</td><td class="n">二</td><td>打包</td><td>命名、匿名自检、压缩、试上传（草稿不留痕）</td><td class="who">T1 T4</td></tr>
+<tr><td class="n">11-25</td><td class="n">三</td><td>打包</td><td><b>正式上传</b> + 截图存档成功页<span class="badge b-gate">G5</span></td><td class="who">T1</td></tr>
+<tr><td class="n">11-26</td><td class="n">四</td><td>缓冲</td><td>只修致命问题（错字 / 图裂 / 视频黑屏）</td><td class="who">—</td></tr>
+<tr><td class="n">11-27</td><td class="n">五</td><td>缓冲</td><td>17:00 前确认状态，之后不再动<span class="badge b-hot">截止</span></td><td class="who">T1</td></tr>
+</tbody>
+</table>
+
+<h2>3 五道门禁 <em>DEADLINE IS A WALL</em></h2>
+<div class="lead">门禁日过了零点还没交，默认采用上一版。延期一次，后面全塌。</div>
+<table>
+<thead><tr><th>门</th><th>日期 20:00</th><th>谁宣布</th><th>看什么</th><th>不过怎么办</th></tr></thead>
+<tbody>
+<tr><td class="who">G1 方向</td><td class="n">11-03</td><td>T2 选版 / T1 确认</td><td>3 版小样 + 各自理由</td><td>选风险最低那版，不再开第四版</td></tr>
+<tr><td class="who">G2 系统</td><td class="n">11-09</td><td>T2</td><td>视觉系统页 + 组件库</td><td>只保 5 个必须组件，其余画屏时补</td></tr>
+<tr><td class="who">G3 屏幕</td><td class="n">11-16</td><td>T1</td><td>七屏冻结 + 9 张导出图</td><td>冻结当版，缺陷进 v2，不许重画</td></tr>
+<tr><td class="who">G4 材料</td><td class="n">11-21</td><td>T1</td><td>流程图 + 视频 v1 + 说明骨架</td><td>用现有最好版本凑，绝不延期</td></tr>
+<tr><td class="who">G5 上传</td><td class="n">11-25</td><td>T1</td><td>解压回看 + 匿名自检</td><td>11-26 / 27 只救火，不改内容</td></tr>
+</tbody>
+</table>
+
+<h2>4 卡点预案 <em>IF IT BREAKS</em></h2>
+<table>
+<thead><tr><th>卡点</th><th>触发条件</th><th>预案</th></tr></thead>
+<tbody>
+<tr><td class="who">视觉选不出来</td><td>11-03 仍未定</td><td>直接选「冷静 / 纸张质感」那版，砍掉插画工作量</td></tr>
+<tr><td class="who">高保真落后</td><td>11-12 屏 5、6 未开工</td><td>屏 06 家属端降级为 1 张手机示意图 + 说明，保 5 屏</td></tr>
+<tr><td class="who">组件库拖过头</td><td>11-09 组件不足 9 个</td><td>只保磁贴 / 主按钮 / 芯片 / 信息卡 / 状态条，其余临时补并回填</td></tr>
+<tr><td class="who">视频拍不出来</td><td>11-20 无实拍素材</td><td>改纯录屏 + 大字幕 + 环境音，压到 90 秒</td></tr>
+<tr><td class="who">访谈找不到人</td><td>11-07 前无受访者</td><td>用家人 / 邻居替代，标注「非典型样本」，不伪造</td></tr>
+<tr><td class="who">校赛入口拿不到</td><td>11-15 前无回音</td><td>先按赛区要求提交，同时推学院开推荐，留邮件记录</td></tr>
+</tbody>
+</table>
+
+<h2>5 三条并行原则 <em>READ BEFORE DRAWING</em></h2>
+<ol class="rules">
+  <li><b>系统先于屏幕</b>：11-09 前不画成品屏。返工八成不是画得不好，是动手前没定系统。</li>
+  <li><b>图是交付物，原型是证据</b>：交的是高保真图、流程图、视频、展板、说明 PDF。代码能跑只是让人信。</li>
+  <li><b>每周日晚上对齐一次</b>：只看 <code>04-deliverables/</code> 里多了什么，不看进度百分比。</li>
+</ol>
+
+<footer>
+  每日 21:00 群里三行：交了哪个文件（写路径）/ 明天交哪个 / 卡在哪一句话。<br>
+  仓库：medpal-hc2026 ｜ 文档真身：<code>01-competition/03-25天计划.md</code>、<code>01-competition/06-五人分工与验收标准.md</code>
+</footer>
+
+</div>
+</body>
+</html>
