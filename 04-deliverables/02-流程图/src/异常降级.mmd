@@ -5,7 +5,10 @@
 %%   ③ 每条补一句人话兜底文案 —— 原文 03-交互流程.md 只写了动作没写字，
 %%      这几句是 T3 起草的占位写法，文案归 T4，T4 定稿后以 T4 为准。
 %% 口径来源：02-design/03-交互流程.md 第 3 节（六条异常）+ 02-design/02-信息架构.md 第 5 节（五状态清单）
-%% 分组：①②④ 系统层（错在机器，出口回原步骤）｜③⑤ 伦理红线与硬件极限（出口一定是人）｜⑥ 收尾
+%% 分组：①②④ 系统层（错在机器，出口回原步骤）｜③ 伦理红线（出口是求助）｜
+%%       ⑤ 设备极限（出口是换机→归还清空）｜⑥ 收尾
+%% v1.1（2026-11-06，按 T1 review 改）：⑤ 电量低出口从「求助键」改到「归还·清空」
+%%   （求助键不是垃圾桶，见 06-流程图视觉规范.md 6.3）；⑤ 去红色。
 
 flowchart TD
   S["任意步骤（11 节点中的任一节点）"] --> Q1{"① 网络断了"}
@@ -34,12 +37,12 @@ flowchart TD
   S2 --> R
   S4 --> R
   S3 --> HELP["求助键长按 1.5 秒 · 人工接入"]
-  S5 --> HELP
-  S6 --> DONE["归还 · 一键清空"]
+  S5 --> DONE["归还 · 一键清空<br/>换机后新机从原节点接着走"]
+  S6 --> DONE
 
   classDef warn fill:#F8E9D6,stroke:#C9761F,stroke-width:2px
   classDef help fill:#F6DFDB,stroke:#B5392F,stroke-width:2px
   classDef ok fill:#DDEDE3,stroke:#2C7A52,stroke-width:2px
-  class S1,S2,S4 warn
-  class S3,S5,HELP help
+  class S1,S2,S4,S5 warn
+  class S3,HELP help
   class S6,DONE,PASS ok
