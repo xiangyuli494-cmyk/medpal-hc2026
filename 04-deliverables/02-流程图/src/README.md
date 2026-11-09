@@ -26,7 +26,7 @@
 npx -y @mermaid-js/mermaid-cli -i src/主流程.mmd -o 小暖_流程图_主流程.pdf
 ```
 
-或者把 `.mmd` 内容贴进 <https://mermaid.live>，直接导出 SVG / PNG / PDF，不用装任何东西。
+或者把 `.mmd` 内容贴进 mermaid.live（浏览器里搜站名即可），直接导出 SVG / PNG / PDF，不用装任何东西。
 
 ## 导出成品说明（G2 那三份 PDF）
 
