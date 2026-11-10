@@ -1,0 +1,37 @@
+<svg xmlns="http&#58;//www.w3.org/2000/svg" width="1024" height="600" viewBox="0 0 1024 600" font-family="'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+  <title>04 复述校验</title>
+  <desc>小暖院内陪诊终端, 复述校验屏</desc>
+  <defs>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="130%">
+      <feDropShadow dx="0" dy="4" stdDeviation="8" flood-color="#14181A" flood-opacity="0.06"/>
+    </filter>
+  </defs>
+  <rect width="1024" height="600" fill="#F6F3EE"/>
+
+  <circle cx="52" cy="56" r="4" fill="#61696D"/>
+  <text x="66" y="62" font-size="18" fill="#61696D">复述校验</text>
+  <text x="976" y="62" font-size="18" fill="#61696D" text-anchor="end">20:51 / 已联网</text>
+  <line x1="48" y1="84" x2="976" y2="84" stroke="#E3DFD7" stroke-width="1"/>
+
+  <text x="48" y="140" font-size="40" font-weight="700" fill="#14181A">我复述一遍, 您听听对不对</text>
+
+  <rect x="48" y="180" width="928" height="200" rx="20" fill="#FFFFFF" stroke="#E3DFD7" filter="url(#shadow)"/>
+  <text x="72" y="222" font-size="22" fill="#61696D">今天看</text>
+  <text x="176" y="224" font-size="31" font-weight="600" fill="#14181A">心血管内科 / 王医生 / 9:40</text>
+  <line x1="72" y1="256" x2="952" y2="256" stroke="#E3DFD7" stroke-width="1"/>
+  <text x="72" y="294" font-size="22" fill="#61696D">要做</text>
+  <text x="176" y="296" font-size="26" fill="#14181A">两件事: 抽血(要空腹), 心电图</text>
+  <line x1="72" y1="328" x2="952" y2="328" stroke="#E3DFD7" stroke-width="1"/>
+  <text x="72" y="366" font-size="22" fill="#61696D">在哪</text>
+  <text x="176" y="368" font-size="26" fill="#14181A">都在二楼, 先抽血, 再做心电图</text>
+
+  <rect x="48" y="396" width="396" height="120" rx="16" fill="#0E6E63"/>
+  <text x="246" y="466" font-size="26" font-weight="600" fill="#FFFFFF" text-anchor="middle">对, 就是这样</text>
+  <rect x="468" y="396" width="396" height="120" rx="16" fill="none" stroke="#0E6E63" stroke-width="1.5"/>
+  <text x="666" y="466" font-size="26" font-weight="600" fill="#0E6E63" text-anchor="middle">不对, 我再说一遍</text>
+
+  <text x="48" y="552" font-size="22" fill="#61696D">记不住没关系, 我会一直记着.</text>
+
+  <circle cx="932" cy="514" r="44" fill="#B5392F"/>
+  <text x="932" y="521" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">求助</text>
+</svg>
