@@ -1,0 +1,27 @@
+<svg xmlns="http&#58;//www.w3.org/2000/svg" width="1024" height="600" viewBox="0 0 1024 600" font-family="'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+  <title>02 视障语音通道</title>
+  <desc>小暖院内陪诊终端, 视障语音通道屏</desc>
+  <rect width="1024" height="600" fill="#06090A"/>
+
+  <circle cx="52" cy="56" r="4" fill="#5FD3B8"/>
+  <text x="66" y="62" font-size="18" fill="#D6D6D6">语音引导中 / 第 3 步, 共 9 步</text>
+  <text x="976" y="62" font-size="18" fill="#D6D6D6" text-anchor="end">20:51 / 已联网</text>
+  <line x1="48" y1="84" x2="976" y2="84" stroke="#23282A" stroke-width="1"/>
+
+  <g fill="#5FD3B8">
+    <rect x="442" y="172" width="10" height="40" rx="5"/>
+    <rect x="468" y="148" width="10" height="64" rx="5"/>
+    <rect x="494" y="116" width="10" height="96" rx="5"/>
+    <rect x="520" y="140" width="10" height="72" rx="5"/>
+    <rect x="546" y="164" width="10" height="48" rx="5"/>
+    <rect x="572" y="180" width="10" height="32" rx="5"/>
+  </g>
+
+  <text x="512" y="340" font-size="56" font-weight="700" fill="#FFFFFF" text-anchor="middle">往前走十八步</text>
+  <text x="512" y="396" font-size="26" fill="#D6D6D6" text-anchor="middle">好, 停. 右手边是电梯.</text>
+
+  <text x="48" y="552" font-size="22" fill="#D6D6D6">全程语音, 不用碰屏幕. 想说"再说一遍", 就长按任意位置.</text>
+
+  <circle cx="932" cy="514" r="44" fill="#B5392F"/>
+  <text x="932" y="521" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">求助</text>
+</svg>
