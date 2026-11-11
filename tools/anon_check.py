@@ -4,9 +4,12 @@
 
     python tools/anon_check.py
 
-分两级：
-  硬伤（退出码 1）  禁用词、真实手机号、身份证、邮箱、作品材料里的可追溯外链
+分三级：
+  硬伤（退出码 1）  作品文件（02-design/、04-deliverables/）里的禁用词、真实手机号、
+                    身份证、邮箱、可追溯外链；交付目录里混进 .git/.github/.githooks/tools
   提示（不阻塞）    机构名——策划文档里引用主办与赛区高校是正常的，需要人看一遍
+  仓库历史（不阻塞）提交作者名/邮箱/说明——zip 里不含 .git，到不了评委手里，
+                    单独列出来只为打包含 .git 时能追溯到是谁
 
 规矩：
   - 01-competition/ 是内部策划档，引用官方来源的链接是必要的，不做外链检查
@@ -57,6 +60,9 @@ SKIP_DIRS = {".git", "node_modules", "__pycache__"}
 DELIVERABLE_PREFIXES = ("02-design", "04-deliverables")
 SKIP_FILES = {os.path.join("tools", "anon_check.py")}
 
+# 交付目录里一旦出现这四样，打包必然连锅端（04-提交清单 §2 第 3 项）
+FORBIDDEN_IN_DELIVERY = (".git", ".github", ".githooks", "tools")
+
 # 内部策划档：允许引用官方来源
 INTERNAL_PREFIXES = ("01-competition",)
 
@@ -85,11 +91,20 @@ def git_history():
     G5 的「硬伤 0」就永远过不了，检查表也就失去了意义。
     真正需要拦的是「作品文件里的身份」，那一层在 main() 的正文扫描里。
     """
-    if not os.path.isdir(os.path.join(ROOT, ".git")):
+    # worktree / submodule 里 .git 是文件不是目录，isdir 会漏判 → 直接问 git 自己
+    try:
+        probe = subprocess.run(
+            ["git", "-C", ROOT, "rev-parse", "--git-dir"],
+            capture_output=True, text=True, encoding="utf-8",
+            errors="replace", timeout=20,
+        )
+    except (OSError, subprocess.SubprocessError):
+        return None
+    if probe.returncode != 0:
         return None
     try:
         out = subprocess.run(
-            ["git", "-C", ROOT, "log", "--all", "--format=%an%x1F%ae%x1F%s"],
+            ["git", "-C", ROOT, "log", "--all", "--format=%h%x1F%an%x1F%ae%x1F%s"],
             capture_output=True, text=True, encoding="utf-8",
             errors="replace", timeout=20,
         )
@@ -100,22 +115,24 @@ def git_history():
     hits, seen = [], set()
     for line in out.stdout.splitlines():
         parts = line.split("\x1f")
-        if len(parts) < 3:
+        if len(parts) < 4:
             continue
-        blob = "%s <%s> %s" % (parts[0], parts[1], parts[2])
+        sha, name, mail, subj = parts[0], parts[1], parts[2], parts[3]
+        blob = "%s <%s> %s" % (name, mail, subj)
         if blob in seen:
             continue
         seen.add(blob)
+        show = ("%s  %s" % (sha, blob))[:96]
         for word in BANNED:
             if word and word in blob:
-                hits.append((".git 提交历史", 0, "禁用词：%s" % word, blob[:80]))
+                hits.append((".git 提交历史", 0, "禁用词：%s" % word, show))
         for pattern, why, scope in HARD:
             if scope is None or scope == "deliverable":
                 for m in re.finditer(pattern, blob):
                     hit = m.group(0)
                     if why.startswith("邮箱") and hit.split("@")[-1].lower() in SAFE_EMAIL_DOMAINS:
                         continue
-                    hits.append((".git 提交历史", 0, "%s：%s" % (why, hit), blob[:80]))
+                    hits.append((".git 提交历史", 0, "%s：%s" % (why, hit), show))
     return hits
 
 
@@ -153,16 +170,21 @@ def main():
                 for m in re.finditer(pattern, line):
                     soft_hits.append((rel, no, "%s：%s" % (why, m.group(0)), line.strip()[:80]))
 
-    # 交付目录里绝不能出现 .git —— 打包时最容易连锅端
-    for base, dirs, _files in os.walk(os.path.join(ROOT, "04-deliverables")):
-        for d in list(dirs):
-            if d == ".git":
-                hard_hits.append((os.path.relpath(os.path.join(base, d), ROOT), 0,
-                                  "交付目录里混进了 .git", "打包前删掉：它会带上全部历史与身份"))
+    # 交付目录里绝不能出现这四样 —— 打包时最容易连锅端
+    # 口径来自 01-competition/04-提交清单与命名.md §2 第 3 项
+    for base, dirs, files in os.walk(os.path.join(ROOT, "04-deliverables")):
+        for name in sorted(set(dirs) | set(files)):
+            if name not in FORBIDDEN_IN_DELIVERY:
+                continue
+            full = os.path.join(base, name)
+            kind = "目录" if os.path.isdir(full) else "文件"
+            hard_hits.append((os.path.relpath(full, ROOT), 0,
+                              "交付目录里混进了 %s（%s）" % (name, kind),
+                              "打包前删掉：它会带上历史、钩子与脚本"))
 
     gh = git_history()
     if gh is None:
-        print("（不是 git 仓库或读不到历史：跳过 .git 检查）")
+        print("（不是 git 仓库，或 git 读不到历史：跳过 .git 检查；worktree/submodule 也算 git 仓库）")
 
     print("扫描 %d 个文本文件%s" % (scanned, " + .git 提交历史" if gh is not None else ""))
 

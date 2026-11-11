@@ -21,7 +21,7 @@
 
 ## 打包前
 
-1. 跑 `python tools/anon_check.py`（注意：`04-deliverables/` 默认跳过，交付文件需人工再检查一遍元数据）
+1. 跑 `python tools/anon_check.py`（`04-deliverables/` **会被扫**，这里出现的身份痕迹算硬伤；脚本读不了 PDF/PNG 内容，图片与 PDF 的元数据仍需按下一条人工清）
 2. 清空 PDF 文档属性（Author / Creator / Company）
 3. 确认图片无 GPS、无设备名
 4. `zip -r 数字媒体设计_小暖_张三.zip 数字媒体设计_小暖_张三/`
