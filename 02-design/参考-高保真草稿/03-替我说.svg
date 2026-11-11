@@ -1,0 +1,43 @@
+<svg xmlns="http&#58;//www.w3.org/2000/svg" width="1024" height="600" viewBox="0 0 1024 600" font-family="'Noto Sans SC', 'Microsoft YaHei', sans-serif">
+  <title>03 替我说</title>
+  <desc>小暖院内陪诊终端, 替我说屏</desc>
+  <rect width="1024" height="600" fill="#F6F3EE"/>
+
+  <circle cx="52" cy="56" r="4" fill="#61696D"/>
+  <text x="66" y="62" font-size="18" fill="#61696D">替我说</text>
+  <text x="976" y="62" font-size="18" fill="#61696D" text-anchor="end">20:51 / 已联网</text>
+  <line x1="48" y1="84" x2="976" y2="84" stroke="#E3DFD7" stroke-width="1"/>
+
+  <text x="48" y="140" font-size="40" font-weight="700" fill="#14181A">替我说</text>
+  <text x="192" y="140" font-size="22" fill="#61696D">这句话是放给医生听的</text>
+
+  <rect x="48" y="168" width="288" height="88" rx="16" fill="#DCEAE6" stroke="#0E6E63" stroke-width="1.5"/>
+  <text x="192" y="220" font-size="26" fill="#14181A" text-anchor="middle">我这两天胸口闷</text>
+  <circle cx="316" cy="188" r="12" fill="#0E6E63"/>
+  <path d="M311 188l3.5 4 7.5-9" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <rect x="368" y="168" width="288" height="88" rx="16" fill="#FFFFFF" stroke="#E3DFD7"/>
+  <text x="512" y="220" font-size="26" fill="#14181A" text-anchor="middle">晚上躺下更明显</text>
+
+  <rect x="688" y="168" width="288" height="88" rx="16" fill="#DCEAE6" stroke="#0E6E63" stroke-width="1.5"/>
+  <text x="832" y="220" font-size="26" fill="#14181A" text-anchor="middle">我对青霉素过敏</text>
+  <circle cx="956" cy="188" r="12" fill="#0E6E63"/>
+  <path d="M951 188l3.5 4 7.5-9" stroke="#FFFFFF" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+
+  <rect x="48" y="280" width="288" height="88" rx="16" fill="#FFFFFF" stroke="#E3DFD7"/>
+  <text x="192" y="332" font-size="26" fill="#14181A" text-anchor="middle">请再说一遍</text>
+
+  <rect x="368" y="280" width="288" height="88" rx="16" fill="#FFFFFF" stroke="#E3DFD7"/>
+  <text x="512" y="332" font-size="26" fill="#14181A" text-anchor="middle">请写给我看</text>
+
+  <rect x="688" y="280" width="288" height="88" rx="16" fill="#FFFFFF" stroke="#E3DFD7"/>
+  <text x="832" y="332" font-size="26" fill="#14181A" text-anchor="middle">我需要人扶一下</text>
+
+  <rect x="48" y="392" width="396" height="120" rx="16" fill="#0E6E63"/>
+  <text x="246" y="462" font-size="26" font-weight="600" fill="#FFFFFF" text-anchor="middle">念给医生听</text>
+
+  <text x="48" y="552" font-size="22" fill="#61696D">王医生: 先抽个血, 再做心电图.</text>
+
+  <circle cx="932" cy="514" r="44" fill="#B5392F"/>
+  <text x="932" y="521" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">求助</text>
+</svg>
