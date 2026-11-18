@@ -4,8 +4,8 @@
   <rect width="1024" height="600" fill="#F6F3EE"/>
 
   <circle cx="52" cy="56" r="4" fill="#61696D"/>
-  <text x="66" y="62" font-size="18" fill="#61696D">替我说</text>
-  <text x="976" y="62" font-size="18" fill="#61696D" text-anchor="end">20:51 / 已联网</text>
+  <text x="66" y="62" font-size="18" fill="#61696D">已开机 · 门诊大厅</text>
+  <text x="976" y="62" font-size="18" fill="#61696D" text-anchor="end">20:51 · 已联网</text>
   <line x1="48" y1="84" x2="976" y2="84" stroke="#E3DFD7" stroke-width="1"/>
 
   <text x="48" y="140" font-size="40" font-weight="700" fill="#14181A">替我说</text>
@@ -36,7 +36,7 @@
   <rect x="48" y="392" width="396" height="120" rx="16" fill="#0E6E63"/>
   <text x="246" y="462" font-size="26" font-weight="600" fill="#FFFFFF" text-anchor="middle">念给医生听</text>
 
-  <text x="48" y="552" font-size="22" fill="#61696D">王医生: 先抽个血, 再做心电图.</text>
+  <text x="48" y="552" font-size="22" fill="#61696D">王医生：先抽个血，再做心电图。</text>
 
   <circle cx="932" cy="514" r="44" fill="#B5392F"/>
   <text x="932" y="521" font-size="22" font-weight="700" fill="#FFFFFF" text-anchor="middle">求助</text>
